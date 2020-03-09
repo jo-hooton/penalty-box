@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useCounter from "../hooks/useCounter";
 
 const SkaterTimer = props => {
-  const { count, up, down, reset, startCount } = useCounter(30);
+  const { count, setCount, up, down, reset, startCount } = useCounter(30);
   const [active, setActive] = useState(false);
   const [extraSeconds, setExtraSeconds] = useState(false);
   const toggleActive = () => {
@@ -36,19 +36,24 @@ const SkaterTimer = props => {
   }, [active, count]);
 
   const switchToOtherJammer = () => {
-    props.switchToOtherJammer(count, extraSeconds);
+    props.switchJammers(count, extraSeconds, props.jammer);
   };
 
   useEffect(() => {
-    if (!props.jammerSwitch) {
-      switchToOtherJammer();
-      resetTimer();
+    if (props.jammer && props.jammerSwitch) {
+      if (active) {
+        switchToOtherJammer();
+        reset();
+      } else {
+        setCount(props.jammerSwitchTime);
+        setActive(true);
+      }
     }
   }, [props.jammerSwitch]);
 
   return (
     <>
-      <p>Timer</p>
+      <p>{props.jammer ? `Jammer` : `Blocker`}</p>
       <time>{count}</time>
       <button onClick={toggleActive}>{active ? `Pause` : `Start`}</button>
       <button onClick={alterPenaltyTime}>

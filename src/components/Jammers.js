@@ -10,7 +10,7 @@ const Jammers = () => {
     setJammerSwitch(!jammerSwitch);
   };
 
-  const switchToOtherJammer = (count, extraSeconds) => {
+  const switchJammers = (count, extraSeconds) => {
     if (!extraSeconds) {
       setJammerSwitchTime(count);
     } else {
@@ -21,18 +21,22 @@ const Jammers = () => {
 
   return (
     <>
-      <button onClick={jammerSwitching}>Jammer Switch</button>
       <SkaterTimer
         jammer={true}
         jammerSwitch={jammerSwitch}
         setJammerSwitch={setJammerSwitch}
-        switchToOtherJammer={switchToOtherJammer}
+        switchJammers={switchJammers}
       />
+      <div> ----------------- </div>
+      <div> ----------------- </div>
+      <button onClick={jammerSwitching}>Jammer Switch</button>
+      <div> ----------------- </div>
+      <div> ----------------- </div>
       <SkaterTimer
         jammer={true}
         jammerSwitch={jammerSwitch}
         setJammerSwitch={setJammerSwitch}
-        switchToOtherJammer={switchToOtherJammer}
+        switchJammers={switchJammers}
       />
     </>
   );

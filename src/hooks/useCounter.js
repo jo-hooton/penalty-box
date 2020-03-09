@@ -7,7 +7,7 @@ const useCounter = (startCountEntry = 0) => {
   const reset = () => setCount(startCountEntry);
   const startCount = startCountEntry;
 
-  return { count, up, down, reset, startCount };
+  return { count, setCount, up, down, reset, startCount };
 };
 
 export default useCounter;
