@@ -43,11 +43,12 @@ const SkaterTimer = props => {
     if (props.jammer && props.jammerSwitch) {
       if (active) {
         switchToOtherJammer();
-        reset();
+        resetTimer();
       } else {
         setCount(props.jammerSwitchTime);
-        setActive(true);
+        toggleActive();
       }
+      props.setJammerSwitch(false);
     }
   }, [props.jammerSwitch]);
 
