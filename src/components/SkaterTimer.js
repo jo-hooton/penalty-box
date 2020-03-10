@@ -30,8 +30,6 @@ const SkaterTimer = props => {
         <div class="start-pause-button" onClick={toggleActive}>
           {active ? `Pause` : `Start`}
         </div>
-        {/* <div onClick={subtractPenalty}>- 30</div>
-        <div onClick={addPenalty}>+ 30</div> */}
         <div class="reset-button" onClick={resetTimer}>
           Reset
         </div>
