@@ -1,13 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import useInterval from "../hooks/useInterval.js";
 import SkaterTimer from "./SkaterTimer";
-import Jammers from "./Jammers";
 
 const SkaterTimerContainer = () => {
-  const [jammerSwitch, setJammerSwitch] = useState(true);
   const [currentJammer, setCurrentJammer] = useState(null);
-  const [jammerSwitchTime, setJammerSwitchTime] = useState(0);
 
   const [skaters, setSkaters] = useState([
     {
@@ -68,8 +64,6 @@ const SkaterTimerContainer = () => {
         otherActiveJammer = skaters.find(
           s => s.type === "JAMMER" && s.active && s.id !== skaterId
         );
-        console.log(otherActiveJammer);
-        // penaltyTime = otherActiveJammer.time;
       }
 
       return {
@@ -109,23 +103,6 @@ const SkaterTimerContainer = () => {
         };
       })
     );
-  };
-
-  const toggleSkaterTimer = skaterId => {
-    const skater = skaters.find(s => s.id === skaterId);
-    let interval = null;
-
-    if (skater.active) {
-      interval = setInterval(() => {
-        console.log(skater.time - 1);
-        changeSkaterTime(skater.time - 1);
-      }, 1000);
-    } else if (skater.time <= 0 && skater.active) {
-      resetSkaterTimer(skaterId);
-    } else {
-      clearInterval(interval);
-      resetSkaterTimer(skaterId);
-    }
   };
 
   //   return () => clearInterval(interval);
