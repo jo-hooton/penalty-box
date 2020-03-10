@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import SkaterTimer from "./SkaterTimer";
 
 const SkaterTimerContainer = () => {
-  const [currentJammer, setCurrentJammer] = useState(null);
-
   const [skaters, setSkaters] = useState([
     {
       id: 3,
@@ -49,10 +47,6 @@ const SkaterTimerContainer = () => {
       active: false
     }
   ]);
-
-  const switchJammers = () => {
-    currentJammer == 1 ? setCurrentJammer(2) : setCurrentJammer(1);
-  };
 
   const toggleSkaterActive = skaterId => {
     let otherActiveJammer;
@@ -105,13 +99,23 @@ const SkaterTimerContainer = () => {
     );
   };
 
-  //   return () => clearInterval(interval);
-
   const resetSkaterTimer = skaterId => {
     setSkaters(
       skaters.map(s => {
         if (s.id !== skaterId) return s;
 
+        return {
+          ...s,
+          active: false,
+          time: 30
+        };
+      })
+    );
+  };
+
+  const resetTimers = () => {
+    setSkaters(
+      skaters.map(s => {
         return {
           ...s,
           active: false,
@@ -152,6 +156,9 @@ const SkaterTimerContainer = () => {
             subtractPenalty={() => subtractSkaterPenalty(skater.id)}
           />
         ))}
+      </div>
+      <div class="reset-all-button" onClick={resetTimers}>
+        Reset All
       </div>
     </>
   );

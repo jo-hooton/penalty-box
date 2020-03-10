@@ -6,7 +6,9 @@ function App() {
   return (
     <>
       <header>Penalty Box Manager</header>
-      <SkaterTimerContainer />
+      <div class="main-content">
+        <SkaterTimerContainer />
+      </div>
     </>
   );
 }
