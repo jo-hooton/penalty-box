@@ -5,7 +5,7 @@ import Jammers from "./components/Jammers";
 function App() {
   return (
     <>
-      <header>Penalty Tracker</header>
+      <header>Penalty Box Manager</header>
       <SkaterTimerContainer />
     </>
   );

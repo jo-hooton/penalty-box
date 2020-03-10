@@ -55,6 +55,7 @@ const SkaterTimer = props => {
   // }, [props.currentJammer]);
   const {
     key,
+    type,
     active,
     toggleActive,
     resetTimer,
@@ -66,21 +67,25 @@ const SkaterTimer = props => {
   } = props;
 
   useInterval(() => {
-    if (active) changeTime(key);
+    if (active && time > 0) changeTime(key);
+    if (time <= 0) resetTimer();
   }, 1000);
 
   // const { count, setCount, up, down, reset, startCount } = useCounter(30);
   return (
     <>
-      <div>
-        <p>
-          {props.type} - Team {teamId}
-        </p>
-        <time>{time}</time>
-        <button onClick={toggleActive}>{active ? `Pause` : `Start`}</button>
-        <button onClick={subtractPenalty}>- 30</button>
-        <button onClick={addPenalty}>+ 30</button>
-        <button onClick={resetTimer}>Reset</button>
+      <div class="skater-timer">
+        <p>Team {teamId}</p>
+        <p>{type}</p>
+        <time class="remaining-time">{time}</time>
+        <div class="start-pause-button" onClick={toggleActive}>
+          {active ? `Pause` : `Start`}
+        </div>
+        {/* <button onClick={subtractPenalty}>- 30</button>
+        <button onClick={addPenalty}>+ 30</button> */}
+        <div class="reset-button" onClick={resetTimer}>
+          Reset
+        </div>
       </div>
     </>
   );

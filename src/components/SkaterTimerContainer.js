@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useInterval from "../hooks/useInterval.js";
 import SkaterTimer from "./SkaterTimer";
 import Jammers from "./Jammers";
@@ -60,7 +60,6 @@ const SkaterTimerContainer = () => {
 
   const toggleSkaterActive = skaterId => {
     let otherActiveJammer;
-    let penaltyTime = 30;
 
     let newSkaters = skaters.map(s => {
       if (s.id !== skaterId) return s;
@@ -75,8 +74,7 @@ const SkaterTimerContainer = () => {
 
       return {
         ...s,
-        active: !s.active,
-        time: penaltyTime
+        active: !s.active
       };
     });
 
@@ -165,19 +163,19 @@ const SkaterTimerContainer = () => {
 
   return (
     <>
-      <h1>Penalty Box Manager</h1>
-      <button onClick={switchJammers}>Jammer Switch</button>
-      {skaters.map(skater => (
-        <SkaterTimer
-          key={skater.id}
-          {...skater}
-          toggleActive={() => toggleSkaterActive(skater.id)}
-          changeTime={() => changeSkaterTime(skater.id)}
-          resetTimer={() => resetSkaterTimer(skater.id)}
-          addPenalty={() => addSkaterPenalty(skater.id)}
-          subtractPenalty={() => subtractSkaterPenalty(skater.id)}
-        />
-      ))}
+      <div class="skater-timers">
+        {skaters.map(skater => (
+          <SkaterTimer
+            key={skater.id}
+            {...skater}
+            toggleActive={() => toggleSkaterActive(skater.id)}
+            changeTime={() => changeSkaterTime(skater.id)}
+            resetTimer={() => resetSkaterTimer(skater.id)}
+            addPenalty={() => addSkaterPenalty(skater.id)}
+            subtractPenalty={() => subtractSkaterPenalty(skater.id)}
+          />
+        ))}
+      </div>
     </>
   );
 };

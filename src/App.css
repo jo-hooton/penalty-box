@@ -2,12 +2,57 @@
 
 body {
   font-family: "Roboto Mono", monospace;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-image: -webkit-linear-gradient(150deg, #212121 55%, #ff89f7 55%);
+  min-height: 100vh;
+  min-width: 100vw;
+  color: white;
+  position: fixed;
+}
+
+header {
+  padding: 1em;
+  font-size: 1.5em;
+  font-weight: 700;
 }
 
 .skater-timers {
-  /* margin: auto 0; */
   width: 100%;
-  display: grid;
-  grid-template-columns: 5em 5em 5em 5em 5em 5em;
-  grid-template-rows: 25% 100px auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+}
+
+.skater-timer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.start-pause-button,
+.reset-button {
+  background-color: white;
+  color: black;
+  margin: 0.5em;
+  border: none;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1em;
+  min-width: 5em;
+  padding: 0.3em 0;
+}
+
+.start-pause-button:active,
+.reset-button:active {
+  style: none;
+}
+
+.remaining-time {
+  font-size: 3em;
+}
+
+p {
+  margin: 0 auto;
+  font-weight: 1000;
 }
