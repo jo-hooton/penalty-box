@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SkaterTimer from "./SkaterTimer";
 
 const SkaterTimerContainer = () => {
@@ -88,7 +87,7 @@ const SkaterTimerContainer = () => {
   };
 
   const changeSkaterTime = skaterId => {
-    setSkaters(
+    setSkaters(skaters =>
       skaters.map(s => {
         if (s.id !== skaterId) return s;
 
@@ -101,7 +100,7 @@ const SkaterTimerContainer = () => {
   };
 
   const resetSkaterTimer = skaterId => {
-    setSkaters(
+    setSkaters(skaters =>
       skaters.map(s => {
         if (s.id !== skaterId) return s;
 
@@ -115,7 +114,7 @@ const SkaterTimerContainer = () => {
   };
 
   const resetTimers = () => {
-    setSkaters(
+    setSkaters(skaters =>
       skaters.map(s => {
         return {
           ...s,
@@ -126,26 +125,26 @@ const SkaterTimerContainer = () => {
     );
   };
 
-  const alterSkaterPenaltyTime = (skaterId, increment) => {
-    setSkaters(
-      skaters.map(s => {
-        if (s.id !== skaterId) return s;
+  // const alterSkaterPenaltyTime = (skaterId, increment) => {
+  //   setSkaters(
+  //     skaters.map(s => {
+  //       if (s.id !== skaterId) return s;
 
-        return {
-          ...s,
-          time: s.time + increment
-        };
-      })
-    );
-  };
+  //       return {
+  //         ...s,
+  //         time: s.time + increment
+  //       };
+  //     })
+  //   );
+  // };
 
-  const addSkaterPenalty = skaterId => alterSkaterPenaltyTime(skaterId, 30);
-  const subtractSkaterPenalty = skaterId =>
-    alterSkaterPenaltyTime(skaterId, -30);
+  // const addSkaterPenalty = skaterId => alterSkaterPenaltyTime(skaterId, 30);
+  // const subtractSkaterPenalty = skaterId =>
+  //   alterSkaterPenaltyTime(skaterId, -30);
 
   return (
     <>
-      <div class="skater-timers">
+      <div className="skater-timers">
         {skaters.map(skater => (
           <SkaterTimer
             key={skater.id}
@@ -156,7 +155,7 @@ const SkaterTimerContainer = () => {
           />
         ))}
       </div>
-      <div class="reset-all-button" onClick={resetTimers}>
+      <div className="reset-all-button" onClick={resetTimers}>
         Reset All
       </div>
     </>

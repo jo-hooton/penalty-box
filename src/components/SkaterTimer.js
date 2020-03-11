@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import useCounter from "../hooks/useCounter";
+import React from "react";
 import useInterval from "../hooks/useInterval.js";
 
 const SkaterTimer = props => {
   const {
-    key,
     type,
     active,
     toggleActive,
@@ -15,20 +13,20 @@ const SkaterTimer = props => {
   } = props;
 
   useInterval(() => {
-    if (active && time > 0) changeTime(key);
+    if (active && time > 0) changeTime();
     if (time <= 0) resetTimer();
   }, 1000);
 
   return (
     <>
-      <div class="skater-timer">
+      <div className="skater-timer">
         <p>Team {teamId}</p>
         <p>{type}</p>
-        <time class="remaining-time">{time}</time>
-        <div class="start-pause-button" onClick={toggleActive}>
+        <time className="remaining-time">{time}</time>
+        <div className="start-pause-button" onClick={toggleActive}>
           {active ? `Pause` : `Start`}
         </div>
-        <div class="reset-button" onClick={resetTimer}>
+        <div className="reset-button" onClick={resetTimer}>
           Reset
         </div>
       </div>
