@@ -9,8 +9,6 @@ const SkaterTimer = props => {
     active,
     toggleActive,
     resetTimer,
-    addPenalty,
-    subtractPenalty,
     time,
     teamId,
     changeTime

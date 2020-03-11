@@ -68,6 +68,7 @@ const SkaterTimerContainer = () => {
 
     if (otherActiveJammer) {
       newSkaters = newSkaters.map(s => {
+        console.log(otherActiveJammer.time);
         if (s.id === skaterId)
           return {
             ...s,
@@ -152,8 +153,6 @@ const SkaterTimerContainer = () => {
             toggleActive={() => toggleSkaterActive(skater.id)}
             changeTime={() => changeSkaterTime(skater.id)}
             resetTimer={() => resetSkaterTimer(skater.id)}
-            addPenalty={() => addSkaterPenalty(skater.id)}
-            subtractPenalty={() => subtractSkaterPenalty(skater.id)}
           />
         ))}
       </div>
