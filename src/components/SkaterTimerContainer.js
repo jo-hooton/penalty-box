@@ -2,48 +2,56 @@ import React, { useState } from "react";
 import SkaterTimer from "./SkaterTimer";
 
 const SkaterTimerContainer = () => {
+  const [active, setActive] = useState(false);
+  const [paused, setPaused] = useState(false);
   const [skaters, setSkaters] = useState([
     {
       id: 3,
       teamId: 1,
       type: "BLOCKER",
       time: 30,
-      active: false
+      active: false,
+      paused: false
     },
     {
       id: 4,
       teamId: 1,
       type: "BLOCKER",
       time: 30,
-      active: false
+      active: false,
+      paused: false
     },
     {
       id: 1,
       teamId: 1,
       type: "JAMMER",
       time: 30,
-      active: false
+      active: false,
+      paused: false
     },
     {
       id: 2,
       teamId: 2,
       type: "JAMMER",
       time: 30,
-      active: false
+      active: false,
+      paused: false
     },
     {
       id: 5,
       teamId: 2,
       type: "BLOCKER",
       time: 30,
-      active: false
+      active: false,
+      paused: false
     },
     {
       id: 6,
       teamId: 2,
       type: "BLOCKER",
       time: 30,
-      active: false
+      active: false,
+      paused: false
     }
   ]);
 
@@ -125,22 +133,42 @@ const SkaterTimerContainer = () => {
     );
   };
 
-  // const alterSkaterPenaltyTime = (skaterId, increment) => {
-  //   setSkaters(
-  //     skaters.map(s => {
-  //       if (s.id !== skaterId) return s;
+  const pauseTimers = () => {
+    setPaused(!paused);
+    setSkaters(skaters =>
+      skaters.map(s => {
+        if (!s.paused) {
+          return {
+            ...s,
+            active: true,
+            paused: false
+          };
+        } else if (!s.active)
+          return {
+            ...s,
+            active: false,
+            paused: true
+          };
+      })
+    );
+  };
 
-  //       return {
-  //         ...s,
-  //         time: s.time + increment
-  //       };
-  //     })
-  //   );
-  // };
+  const alterSkaterPenaltyTime = (skaterId, increment) => {
+    setSkaters(
+      skaters.map(s => {
+        if (s.id !== skaterId) return s;
 
-  // const addSkaterPenalty = skaterId => alterSkaterPenaltyTime(skaterId, 30);
-  // const subtractSkaterPenalty = skaterId =>
-  //   alterSkaterPenaltyTime(skaterId, -30);
+        return {
+          ...s,
+          time: s.time + increment
+        };
+      })
+    );
+  };
+
+  const addSkaterPenalty = skaterId => alterSkaterPenaltyTime(skaterId, 30);
+  const subtractSkaterPenalty = skaterId =>
+    alterSkaterPenaltyTime(skaterId, -30);
 
   return (
     <>
@@ -152,8 +180,13 @@ const SkaterTimerContainer = () => {
             toggleActive={() => toggleSkaterActive(skater.id)}
             changeTime={() => changeSkaterTime(skater.id)}
             resetTimer={() => resetSkaterTimer(skater.id)}
+            addPenalty={() => addSkaterPenalty(skater.id)}
+            subtractPenalty={() => subtractSkaterPenalty(skater.id)}
           />
         ))}
+      </div>
+      <div className="reset-all-button" onClick={pauseTimers}>
+        Pause All
       </div>
       <div className="reset-all-button" onClick={resetTimers}>
         Reset All

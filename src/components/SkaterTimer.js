@@ -9,7 +9,9 @@ const SkaterTimer = props => {
     resetTimer,
     time,
     teamId,
-    changeTime
+    changeTime,
+    addPenalty,
+    subtractPenalty
   } = props;
 
   useInterval(() => {
@@ -25,6 +27,15 @@ const SkaterTimer = props => {
         <time className="remaining-time">{time}</time>
         <div className="start-pause-button" onClick={toggleActive}>
           {active ? `Pause` : `Start`}
+        </div>
+        <div className="reset-button" onClick={time <= 90 ? addPenalty : null}>
+          +30
+        </div>
+        <div
+          className="reset-button"
+          onClick={time > 30 ? subtractPenalty : null}
+        >
+          -30
         </div>
         <div className="reset-button" onClick={resetTimer}>
           Reset
