@@ -69,3 +69,7 @@ p {
   margin: 0 auto;
   font-weight: 1000;
 }
+
+.no-active-button {
+  color: #eeeeee;
+}

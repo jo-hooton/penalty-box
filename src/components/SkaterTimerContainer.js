@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import SkaterTimer from "./SkaterTimer";
 
 const SkaterTimerContainer = () => {
-  const [active, setActive] = useState(false);
   const [paused, setPaused] = useState(false);
   const [skaters, setSkaters] = useState([
     {
@@ -137,20 +136,39 @@ const SkaterTimerContainer = () => {
     setPaused(!paused);
     setSkaters(skaters =>
       skaters.map(s => {
-        if (!s.paused) {
-          return {
-            ...s,
-            active: true,
-            paused: false
-          };
-        } else if (!s.active)
+        if (s.active) {
           return {
             ...s,
             active: false,
             paused: true
           };
+        } else if (!s.active && s.paused) {
+          return {
+            ...s,
+            active: true,
+            paused: false
+          };
+        } else {
+          return {
+            ...s
+          };
+        }
       })
     );
+  };
+
+  const activateTimerButtons = () => {
+    const startPauseBtns = document.querySelectorAll(".start-pause-button");
+    startPauseBtns.forEach(button => {
+      !paused
+        ? button.classList.remove(".no-active-button")
+        : button.classList.add(".no-active-button");
+    });
+  };
+
+  const togglepPause = () => {
+    pauseTimers();
+    activateTimerButtons();
   };
 
   const alterSkaterPenaltyTime = (skaterId, increment) => {
@@ -185,8 +203,8 @@ const SkaterTimerContainer = () => {
           />
         ))}
       </div>
-      <div className="reset-all-button" onClick={pauseTimers}>
-        Pause All
+      <div className="reset-all-button" onClick={togglepPause}>
+        {paused ? "Resume All" : `Pause All`}
       </div>
       <div className="reset-all-button" onClick={resetTimers}>
         Reset All
