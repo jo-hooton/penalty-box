@@ -161,8 +161,8 @@ const SkaterTimerContainer = () => {
     const startPauseBtns = document.querySelectorAll(".start-pause-button");
     startPauseBtns.forEach(button => {
       !paused
-        ? button.classList.remove(".no-active-button")
-        : button.classList.add(".no-active-button");
+        ? button.classList.add("no-active-button")
+        : button.classList.remove("no-active-button");
     });
   };
 
