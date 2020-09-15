@@ -9,4 +9,4 @@ In the project directory, run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Demo video: [https://www.youtube.com/watch?v=JJRn_IOFsCk](Demo).
+Demo video: [https://www.youtube.com/watch?v=JJRn_IOFsCk](https://www.youtube.com/watch?v=JJRn_IOFsCk).
